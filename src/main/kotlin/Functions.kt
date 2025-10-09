@@ -2,23 +2,21 @@ package org.example
 
 fun main() {
     println("Enter a string ")
-    val input = readln()
+    val input = readln().toInt()
 
-    val reversed = reversed(stringToReverse = input)
+    println(input+input.reversed())
 
-    if (input == reversed) {
-        println("The nuber is palindrom")
-    }
 }
 
 
-fun reversed(
-    stringToReverse: String = "Smooth operator"
-): String {
+fun String.reversed(): String {
     val finalString = buildString {
-        for (i in stringToReverse.lastIndex downTo 0) {
-            append(stringToReverse[i])
+        for (i in this@reversed.lastIndex downTo 0) {
+            append(this@reversed[i])
         }
     }
     return finalString
+}
+fun Int.reversed(): Int {
+    return this.toString().reversed().toInt()
 }

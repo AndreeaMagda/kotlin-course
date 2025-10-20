@@ -5,31 +5,40 @@ import kotlin.math.sqrt
 
 fun main() {
     val rect1 = Rectangle(
-        width = 3f,
-        height = 5f
+        width = 3f, height = 5f
     )
-    val rect2 = Rectangle(
-        width = 3f,
-        height = 5f
+    Rectangle(
+        width = 3f, height = 5f
     )
-    val rect3= rect1.copy(
+    rect1.copy(
         width = 10f,
     )
 
     val circle = Circle(radius = 25f)
 
-    println(circle.area)
-    println(rect3)
-    println(rect1==rect2)
+    println(sumAreas(rect1, circle))
 
 }
 
-data class Rectangle(val width: Float, val height: Float) {
+interface Shape {
+    val area: Float
+    val circumference: Float
+}
+
+fun sumAreas(vararg shapes: Shape): Double {
+    return shapes.sumOf { currentShape -> currentShape.area.toDouble() }
+}
+
+data class Rectangle(
+    val width: Float, val height: Float
+) : Shape {
     val diagonal = sqrt(width * width + height * height)
-    val area = width * height
+    override val area = width * height
+    override val circumference = 2 * width + 2 * height
 }
 
-data class Circle(val radius: Float) {
-    val area = radius * radius*PI
-    val diameter= 2* radius
+data class Circle(val radius: Float) : Shape {
+    override val area = radius * radius * PI.toFloat()
+    override val circumference = 2 * radius * PI.toFloat()
+    val diameter = 2 * radius
 }
